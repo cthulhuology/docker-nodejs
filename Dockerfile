@@ -37,3 +37,6 @@ RUN /usr/local/bin/npm install -g amqp
 
 # Cleanup
 RUN rm -rf node-v0.10.18.tar.gz node-v0.10.18
+
+# setup npm pathing
+RUN echo 'export NODE_PATH="'$(npm root -g)'"' >> /etc/profile.d/npm.sh
