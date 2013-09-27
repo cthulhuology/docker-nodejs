@@ -1,6 +1,6 @@
 # docker-node
 #
-# VERSION 0.1
+# VERSION 0.2
 
 FROM centos
 MAINTAINER Dave Goehrig dave@dloh.org
@@ -40,3 +40,12 @@ RUN rm -rf node-v0.10.18.tar.gz node-v0.10.18
 
 # setup npm pathing
 RUN echo 'export NODE_PATH="'$(npm root -g)'"' >> /etc/profile.d/npm.sh
+
+# add a PS1 that makes sense
+RUN echo 'export PS1="\u@\h $ "' >> /etc/profile.d/prompt.sh
+
+# expose port 8080 for webapps
+EXPOSE 8080
+
+# startup with a commandline prompt
+CMD /bin/bash -l
