@@ -1,6 +1,8 @@
 docker-nodejs
 =============
 
+WARNING: centos upstream is currently BROKEN do not attempt to rebuild this
+
 A simple Centos + EPEL server with nodejs v0.10.18 + coffeescript + amqp
 
 This container is a basic development environment for coffeescript appliances that speak AMQP to other applications.  The build scripts are available at http://github.com/wotio/docker-nodejs
