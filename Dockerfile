@@ -3,7 +3,10 @@
 # VERSION 0.2
 
 FROM centos:centos6
-MAINTAINER Dave Goehrig dave@dloh.org
+MAINTAINER wot.io devs <dev@wot.io>
+
+# set the npm registry
+RUN npm config set registry http://npm.wot.io:5984/registry/_design/app/_rewrite/
 
 # We need the developer tools to build the occasional add on or two
 RUN yum -y groupinstall "Development Tools"
@@ -29,9 +32,6 @@ RUN cd node-v0.10.18 && make install
 # setup pathing
 RUN echo "export PATH=/usr/local/bin:/usr/local/sbin:$PATH" >> /etc/profile.d/nodejs.sh
 
-# Install coffeescript
-RUN /usr/local/bin/npm install -g coffee-script@1.7.1
-
 # Cleanup
 RUN rm -rf node-v0.10.18.tar.gz node-v0.10.18
 
@@ -41,8 +41,15 @@ RUN echo 'export NODE_PATH="'$(npm root -g)'"' >> /etc/profile.d/npm.sh
 # add a PS1 that makes sense
 RUN echo 'export PS1="\u@\h $ "' >> /etc/profile.d/prompt.sh
 
-# expose port 8080 for webapps
-EXPOSE 8080
+# Install common nodejs apps
+RUN /usr/local/bin/npm install -g coffee-script@1.7.1
+RUN /usr/local/bin/npm install -g supervisor@0.6.0
+RUN /usr/local/bin/npm install -g request
+RUN /usr/local/bin/npm install -g uuid
+RUN /usr/local/bin/npm install -g mocha
+RUN /usr/local/bin/npm install -g chai
+RUN /usr/local/bin/npm install -g ws
+RUN /usr/local/bin/npm install -g querystring
 
 # startup with a commandline prompt
 CMD /bin/bash -l
