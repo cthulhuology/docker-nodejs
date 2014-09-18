@@ -2,7 +2,7 @@
 #
 # VERSION 0.2
 
-FROM centos
+FROM centos:centos6
 MAINTAINER Dave Goehrig dave@dloh.org
 
 # We need the developer tools to build the occasional add on or two
