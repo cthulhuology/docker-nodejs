@@ -30,10 +30,7 @@ RUN cd node-v0.10.18 && make install
 RUN echo "export PATH=/usr/local/bin:/usr/local/sbin:$PATH" >> /etc/profile.d/nodejs.sh
 
 # Install coffeescript
-RUN /usr/local/bin/npm install -g coffee-script
-
-# Install amqp
-RUN /usr/local/bin/npm install -g amqp
+RUN /usr/local/bin/npm install -g coffee-script@1.7.1
 
 # Cleanup
 RUN rm -rf node-v0.10.18.tar.gz node-v0.10.18
