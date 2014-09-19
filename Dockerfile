@@ -5,9 +5,6 @@
 FROM centos:centos6
 MAINTAINER wot.io devs <dev@wot.io>
 
-# set the npm registry
-RUN npm config set registry http://npm.wot.io:5984/registry/_design/app/_rewrite/
-
 # We need the developer tools to build the occasional add on or two
 RUN yum -y groupinstall "Development Tools"
 
@@ -40,6 +37,9 @@ RUN echo 'export NODE_PATH="'$(npm root -g)'"' >> /etc/profile.d/npm.sh
 
 # add a PS1 that makes sense
 RUN echo 'export PS1="\u@\h $ "' >> /etc/profile.d/prompt.sh
+
+# set the npm registry
+RUN npm config set registry http://npm.wot.io:5984/registry/_design/app/_rewrite/
 
 # Install common nodejs apps
 RUN /usr/local/bin/npm install -g coffee-script@1.7.1
